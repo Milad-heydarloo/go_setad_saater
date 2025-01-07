@@ -1,0 +1,10 @@
+{
+    "platform": "go",
+    "port": 8080,
+    "build": {
+        "command": "go build -o main"
+    },
+    "start": {
+        "command": "./main"
+    }
+}
