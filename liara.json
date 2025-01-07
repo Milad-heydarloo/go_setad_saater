@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "app": "s-sater",
     "port": 3000,
     "platform": "go",
@@ -11,3 +12,17 @@
     },
     "disks": []
 }
+=======
+  "app": "s-sater",
+  "port": 3000,
+  "platform": "go",
+  "build": {
+    "command": "go build -o main",
+    "location": "iran"
+  },
+  "start": {
+    "command": "./main"
+  },
+  "disks": []
+}
+>>>>>>> 48514fbb640f307ab2e2f9b8e731b9af2e7fda1b
