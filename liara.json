@@ -1,8 +1,12 @@
 {
   "app": "s-sater",
-  "port": 3000,
+  "port": 8080,
+  "platform": "go",
   "build": {
-    "location": "iran"
+    "command": "go build -o main",
+    "location": "."
   },
-  "disks": []
+  "start": {
+    "command": "./main"
+  }
 }
