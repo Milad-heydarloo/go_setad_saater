@@ -1,3 +1,3 @@
 module go_setad_saater
 
-go 1.23.4
+go 1.20
