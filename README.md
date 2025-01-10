@@ -1,8 +1,3 @@
-
-# Project Title
-
-A brief description of what this project does and who it's for
-
 # API Documentation for Saater Setad
 
 A detailed description of APIs used in the Saater Setad project, including the purpose of each request and the relevant parameters.
@@ -11,9 +6,111 @@ A detailed description of APIs used in the Saater Setad project, including the p
 
 ## Table of Contents
 
-1. [Order Manager APIs](#order-manager-apis)
-2. [User APIs](#user-apis)
+1. [User APIs](#user-apis)
+2. [Order Manager APIs](#order-manager-apis)
 3. [File APIs](#file-apis)
+
+---
+
+## User APIs
+
+### Login
+
+#### Endpoint
+```http
+POST https://s-sater.liara.run/login
+```
+
+#### Body
+```json
+{
+  "organization_code": "132s3456",
+  "password": "passworxd123"
+}
+```
+
+#### Description
+این API برای ورود کاربر با استفاده از کد سازمان و رمز عبور استفاده می‌شود.
+
+---
+
+### Forgot Password
+
+#### Endpoint
+```http
+POST https://s-sater.liara.run/forgot-password
+```
+
+#### Headers
+| Key           | Value          | Description               |
+|---------------|----------------|---------------------------|
+| Content-Type  | application/json | Specifies the content type of the request. |
+
+#### Body
+```json
+{
+  "mobile_number": "09013757395"
+}
+```
+
+#### Description
+این API برای بازیابی رمز عبور از طریق شماره موبایل کاربر استفاده می‌شود.
+
+---
+
+### Update User
+
+#### Endpoint
+```http
+POST https://s-sater.liara.run/update-user
+```
+
+#### Headers
+| Key           | Value          | Description               |
+|---------------|----------------|---------------------------|
+| Content-Type  | application/json | Specifies the content type of the request. |
+
+#### Body
+```json
+{
+  "id": "biyl3sjp14znujo",
+  "organizational_address": " ",
+  "landline_number": " "
+}
+```
+
+#### Description
+این API برای به‌روزرسانی اطلاعات کاربر استفاده می‌شود.
+
+---
+
+### Register
+
+#### Endpoint
+```http
+POST https://s-sater.liara.run/register
+```
+
+#### Headers
+| Key           | Value          | Description               |
+|---------------|----------------|---------------------------|
+| Content-Type  | application/json | Specifies the content type of the request. |
+
+#### Body
+```json
+{
+  "organization_code": "123443345",
+  "landline_number": "02112345678",
+  "email": "exam3dple@example.com",
+  "password": "securepassword",
+  "full_name": "John Doe",
+  "organizational_address": "123 Street, City",
+  "mobile_number": "09123456789"
+}
+```
+
+#### Description
+این API برای ثبت‌نام کاربر جدید استفاده می‌شود.
 
 ---
 
@@ -209,108 +306,6 @@ Form Data:
 
 #### Description
 این API برای به‌روزرسانی فایل فاکتور مربوط به سفارش استفاده می‌شود.
-
----
-
-## User APIs
-
-### Login
-
-#### Endpoint
-```http
-POST https://s-sater.liara.run/login
-```
-
-#### Body
-```json
-{
-  "organization_code": "132s3456",
-  "password": "passworxd123"
-}
-```
-
-#### Description
-این API برای ورود کاربر با استفاده از کد سازمان و رمز عبور استفاده می‌شود.
-
----
-
-### Forgot Password
-
-#### Endpoint
-```http
-POST https://s-sater.liara.run/forgot-password
-```
-
-#### Headers
-| Key           | Value          | Description               |
-|---------------|----------------|---------------------------|
-| Content-Type  | application/json | Specifies the content type of the request. |
-
-#### Body
-```json
-{
-  "mobile_number": "09013757395"
-}
-```
-
-#### Description
-این API برای بازیابی رمز عبور از طریق شماره موبایل کاربر استفاده می‌شود.
-
----
-
-### Update User
-
-#### Endpoint
-```http
-POST https://s-sater.liara.run/update-user
-```
-
-#### Headers
-| Key           | Value          | Description               |
-|---------------|----------------|---------------------------|
-| Content-Type  | application/json | Specifies the content type of the request. |
-
-#### Body
-```json
-{
-  "id": "biyl3sjp14znujo",
-  "organizational_address": " ",
-  "landline_number": " "
-}
-```
-
-#### Description
-این API برای به‌روزرسانی اطلاعات کاربر استفاده می‌شود.
-
----
-
-### Register
-
-#### Endpoint
-```http
-POST https://s-sater.liara.run/register
-```
-
-#### Headers
-| Key           | Value          | Description               |
-|---------------|----------------|---------------------------|
-| Content-Type  | application/json | Specifies the content type of the request. |
-
-#### Body
-```json
-{
-  "organization_code": "123443345",
-  "landline_number": "02112345678",
-  "email": "exam3dple@example.com",
-  "password": "securepassword",
-  "full_name": "John Doe",
-  "organizational_address": "123 Street, City",
-  "mobile_number": "09123456789"
-}
-```
-
-#### Description
-این API برای ثبت‌نام کاربر جدید استفاده می‌شود.
 
 ---
 
