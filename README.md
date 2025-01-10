@@ -22,7 +22,7 @@
             text-align: center;
         }
         main {
-            max-width: 800px;
+            max-width: 900px;
             margin: 2rem auto;
             background: white;
             padding: 2rem;
@@ -48,6 +48,13 @@
         section {
             margin-bottom: 2rem;
         }
+        ul {
+            padding-right: 1rem;
+            list-style: none;
+        }
+        ul li {
+            margin: 0.5rem 0;
+        }
         footer {
             text-align: center;
             padding: 1rem;
@@ -72,9 +79,10 @@
                 <li>مدیریت فایل‌ها</li>
             </ul>
         </section>
+
         <section>
             <h2>مدیریت سفارشات</h2>
-            <h3>ثبت سفارش</h3>
+            <h3>۱. ثبت سفارش</h3>
             <p><strong>آدرس:</strong> <code>https://s-sater.liara.run/register-order</code></p>
             <p><strong>روش:</strong> <code>POST</code></p>
             <p><strong>نمونه داده ورودی:</strong></p>
@@ -86,10 +94,54 @@
   "order_process": "0.2"
 }
             </pre>
+
+            <h3>۲. بروزرسانی فایل‌های سفارش</h3>
+            <p><strong>آدرس:</strong> <code>https://s-sater.liara.run/update-order-files</code></p>
+            <p><strong>روش:</strong> <code>PATCH</code></p>
+            <p><strong>نمونه داده ورودی:</strong></p>
+            <pre>
+{
+  "order_id": "zj1l0dtj95p1jfw",
+  "file_ids": ["8118zbau4end9th", "una8deywd4lio48"]
+}
+            </pre>
+
+            <h3>۳. بروزرسانی توضیحات سفارش</h3>
+            <p><strong>آدرس:</strong> <code>https://s-sater.liara.run/update-order-description</code></p>
+            <p><strong>روش:</strong> <code>PATCH</code></p>
+            <p><strong>نمونه داده ورودی:</strong></p>
+            <pre>
+{
+  "order_id": "zj1l0dtj95p1jfw",
+  "description": "This is a new description for the order."
+}
+            </pre>
+
+            <h3>۴. حذف سفارش</h3>
+            <p><strong>آدرس:</strong> <code>https://s-sater.liara.run/delete-order</code></p>
+            <p><strong>روش:</strong> <code>POST</code></p>
+            <p><strong>نمونه داده ورودی:</strong></p>
+            <pre>
+{
+  "order_id": "zj1l0dtj95p1jfw",
+  "file_ids": ["pfqlig6tcqd21x9", "7zs1bgmygh36e3m"]
+}
+            </pre>
+
+            <h3>۵. دریافت اطلاعات سفارش</h3>
+            <p><strong>آدرس:</strong> <code>https://s-sater.liara.run/get-order</code></p>
+            <p><strong>روش:</strong> <code>POST</code></p>
+            <p><strong>نمونه داده ورودی:</strong></p>
+            <pre>
+{
+  "order_id": "zj1l0dtj95p1jfw"
+}
+            </pre>
         </section>
+
         <section>
             <h2>مدیریت کاربران</h2>
-            <h3>ورود کاربر</h3>
+            <h3>۱. ورود کاربر</h3>
             <p><strong>آدرس:</strong> <code>https://s-sater.liara.run/login</code></p>
             <p><strong>روش:</strong> <code>POST</code></p>
             <p><strong>نمونه داده ورودی:</strong></p>
@@ -99,13 +151,28 @@
   "password": "passworxd123"
 }
             </pre>
+
+            <h3>۲. بازیابی رمز عبور</h3>
+            <p><strong>آدرس:</strong> <code>https://s-sater.liara.run/forgot-password</code></p>
+            <p><strong>روش:</strong> <code>POST</code></p>
+            <p><strong>نمونه داده ورودی:</strong></p>
+            <pre>
+{
+  "mobile_number": "09013757395"
+}
+            </pre>
         </section>
+
         <section>
             <h2>مدیریت فایل‌ها</h2>
-            <h3>آپلود فایل</h3>
+            <h3>۱. آپلود فایل</h3>
             <p><strong>آدرس:</strong> <code>https://s-sater.liara.run/upload-files</code></p>
             <p><strong>روش:</strong> <code>POST</code></p>
-            <p><strong>هدر:</strong> <code>Content-Type: multipart/form-data</code></p>
+            <p><strong>نوع ارسال:</strong> <code>multipart/form-data</code></p>
+
+            <h3>۲. مشاهده فایل</h3>
+            <p><strong>آدرس:</strong> <code>https://s-sater.liara.run/serve-file?file_id=4sc9jf6c7lt24re&action=view</code></p>
+            <p><strong>روش:</strong> <code>GET</code></p>
         </section>
     </main>
     <footer>
