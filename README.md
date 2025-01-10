@@ -1,3 +1,8 @@
+
+# Project Title
+
+A brief description of what this project does and who it's for
+
 # API Documentation for Saater Setad
 
 A detailed description of APIs used in the Saater Setad project, including the purpose of each request and the relevant parameters.
@@ -140,6 +145,73 @@ POST https://s-sater.liara.run/get-order
 
 ---
 
+### Get User Orders
+
+#### Endpoint
+```http
+POST https://s-sater.liara.run/get-user-orders
+```
+
+#### Headers
+| Key           | Value          | Description               |
+|---------------|----------------|---------------------------|
+| Content-Type  | application/json | Specifies the content type of the request. |
+
+#### Body
+```json
+{
+  "user_id": "kvbm4a40in6wvc2"
+}
+```
+
+#### Description
+این API برای دریافت لیست سفارش‌های کاربر استفاده می‌شود.
+
+---
+
+### Update Payment Receipt
+
+#### Endpoint
+```http
+POST https://s-sater.liara.run/update-payment-receipt
+```
+
+#### Headers
+| Key           | Value          | Description               |
+|---------------|----------------|---------------------------|
+| Content-Type  | multipart/form-data | Specifies the content type of the request. |
+
+#### Body
+Form Data:
+| Key      | Value                     | Type   |
+|----------|---------------------------|--------|
+| order_id | 8knue0ocu9s83jr           | text   |
+| file     | postman-cloud:///file_url | file   |
+
+#### Description
+این API برای به‌روزرسانی رسید پرداخت مربوط به یک سفارش استفاده می‌شود.
+
+---
+
+### Update Invoice File
+
+#### Endpoint
+```http
+POST https://s-sater.liara.run/update-invoice-file
+```
+
+#### Body
+Form Data:
+| Key      | Value                     | Type   |
+|----------|---------------------------|--------|
+| order_id | zj1l0dtj95p1jfw           | text   |
+| file     | postman-cloud:///file_url | file   |
+
+#### Description
+این API برای به‌روزرسانی فایل فاکتور مربوط به سفارش استفاده می‌شود.
+
+---
+
 ## User APIs
 
 ### Login
@@ -186,6 +258,62 @@ POST https://s-sater.liara.run/forgot-password
 
 ---
 
+### Update User
+
+#### Endpoint
+```http
+POST https://s-sater.liara.run/update-user
+```
+
+#### Headers
+| Key           | Value          | Description               |
+|---------------|----------------|---------------------------|
+| Content-Type  | application/json | Specifies the content type of the request. |
+
+#### Body
+```json
+{
+  "id": "biyl3sjp14znujo",
+  "organizational_address": " ",
+  "landline_number": " "
+}
+```
+
+#### Description
+این API برای به‌روزرسانی اطلاعات کاربر استفاده می‌شود.
+
+---
+
+### Register
+
+#### Endpoint
+```http
+POST https://s-sater.liara.run/register
+```
+
+#### Headers
+| Key           | Value          | Description               |
+|---------------|----------------|---------------------------|
+| Content-Type  | application/json | Specifies the content type of the request. |
+
+#### Body
+```json
+{
+  "organization_code": "123443345",
+  "landline_number": "02112345678",
+  "email": "exam3dple@example.com",
+  "password": "securepassword",
+  "full_name": "John Doe",
+  "organizational_address": "123 Street, City",
+  "mobile_number": "09123456789"
+}
+```
+
+#### Description
+این API برای ثبت‌نام کاربر جدید استفاده می‌شود.
+
+---
+
 ## File APIs
 
 ### Upload Files
@@ -203,6 +331,43 @@ Form Data:
 
 #### Description
 این API برای آپلود فایل‌ها به سرور استفاده می‌شود.
+
+---
+
+### Delete File
+
+#### Endpoint
+```http
+POST https://s-sater.liara.run/delete-file
+```
+
+#### Body
+```json
+{
+  "id": "8vq8l09lfqwhe9f"
+}
+```
+
+#### Description
+این API برای حذف یک فایل خاص از سرور استفاده می‌شود.
+
+---
+
+### Serve File
+
+#### Endpoint
+```http
+GET https://s-sater.liara.run/serve-file?file_id=4sc9jf6c7lt24re&action=view
+```
+
+#### Query Parameters
+| Key       | Value         | Description                     |
+|-----------|---------------|---------------------------------|
+| file_id   | 4sc9jf6c7lt24re | شناسه فایل                     |
+| action    | view          | عملیات مورد نظر (نمایش فایل)   |
+
+#### Description
+این API برای نمایش فایل از سرور استفاده می‌شود.
 
 ---
 
