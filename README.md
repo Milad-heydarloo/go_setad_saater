@@ -4,65 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مستندات پروژه</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.8;
-            direction: rtl;
-            text-align: right;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-        main {
-            max-width: 900px;
-            margin: 2rem auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
-            color: #007bff;
-        }
-        code {
-            background: #f1f1f1;
-            padding: 0.2rem 0.4rem;
-            border-radius: 5px;
-            font-size: 0.9rem;
-        }
-        pre {
-            background: #f1f1f1;
-            padding: 1rem;
-            border-radius: 10px;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-        section {
-            margin-bottom: 2rem;
-        }
-        ul {
-            padding-right: 1rem;
-            list-style: none;
-        }
-        ul li {
-            margin: 0.5rem 0;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #f1f1f1;
-            color: #777;
-            font-size: 0.9rem;
-        }
-    </style>
+    
+       
 </head>
 <body>
     <header>
