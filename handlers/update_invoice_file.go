@@ -1,3 +1,5 @@
+//
+
 package handlers
 
 import (
@@ -13,30 +15,35 @@ import (
 
 // UpdateInvoiceFileHandler handles uploading a file and updating the invoice_file field for an order
 func UpdateInvoiceFileHandler(w http.ResponseWriter, r *http.Request) {
+	// تنظیم هدرهای CORS
+	enableCORSFile(w)
+
+	// پاسخ به OPTIONS
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
+
+	// بررسی متد HTTP
 	if r.Method != http.MethodPost {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
 	}
 
-	// تنظیم هدرهای CORS
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-
 	// حذف محدودیت حجم فایل
-	if err := r.ParseMultipartForm(0); err != nil { // 0 یعنی بدون محدودیت
+	if err := r.ParseMultipartForm(0); err != nil {
 		http.Error(w, "Invalid multipart form data", http.StatusBadRequest)
 		return
 	}
 
-	// Read order ID
+	// خواندن order_id
 	orderID := r.FormValue("order_id")
 	if orderID == "" {
 		http.Error(w, "Missing order_id", http.StatusBadRequest)
 		return
 	}
 
-	// Read file
+	// خواندن فایل
 	file, fileHeader, err := r.FormFile("file")
 	if err != nil {
 		http.Error(w, "Missing file in request", http.StatusBadRequest)
@@ -44,21 +51,21 @@ func UpdateInvoiceFileHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	// Upload file to PocketBase
+	// آپلود فایل به PocketBase
 	fileID, err := uploadInvoiceFile(file, fileHeader)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Failed to upload file: %v", err), http.StatusInternalServerError)
 		return
 	}
 
-	// Update the invoice_file field in the order
+	// به‌روزرسانی فیلد invoice_file
 	err = updateInvoiceFile(orderID, fileID)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Failed to update order: %v", err), http.StatusInternalServerError)
 		return
 	}
 
-	// Success response
+	// پاسخ موفقیت‌آمیز
 	response := map[string]string{
 		"message":  "Invoice file updated successfully",
 		"order_id": orderID,
@@ -73,6 +80,7 @@ func uploadInvoiceFile(file multipart.File, fileHeader *multipart.FileHeader) (s
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
 
+	// ایجاد فیلد فایل
 	part, err := writer.CreateFormFile("field", fileHeader.Filename)
 	if err != nil {
 		return "", fmt.Errorf("failed to create form file: %w", err)
@@ -90,6 +98,7 @@ func uploadInvoiceFile(file multipart.File, fileHeader *multipart.FileHeader) (s
 	}
 	req.Header.Set("Content-Type", writer.FormDataContentType())
 
+	// ارسال درخواست
 	resp, err := client.Do(req)
 	if err != nil {
 		return "", fmt.Errorf("failed to send request: %w", err)
@@ -101,6 +110,7 @@ func uploadInvoiceFile(file multipart.File, fileHeader *multipart.FileHeader) (s
 		return "", fmt.Errorf("PocketBase returned status %d: %s", resp.StatusCode, string(bodyBytes))
 	}
 
+	// استخراج file_id از پاسخ
 	var response struct {
 		ID string `json:"id"`
 	}
@@ -142,4 +152,12 @@ func updateInvoiceFile(orderID, fileID string) error {
 	}
 
 	return nil
+}
+
+// enableCORSFile adds the CORS headers to the response
+func enableCORSFile(w http.ResponseWriter) {
+	w.Header().Set("Access-Control-Allow-Origin", "https://setad.saaterco.com")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, PATCH, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 }

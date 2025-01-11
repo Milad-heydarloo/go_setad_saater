@@ -1,3 +1,5 @@
+//
+
 package handlers
 
 import (
@@ -9,6 +11,16 @@ import (
 
 // UpdateUserHandler handles updating user information
 func UpdateUserHandler(w http.ResponseWriter, r *http.Request) {
+	// تنظیم هدرهای CORS
+	enableCORSForUpdateUser(w)
+
+	// پاسخ به OPTIONS
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
+
+	// بررسی متد HTTP
 	if r.Method != http.MethodPost {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
@@ -62,4 +74,12 @@ func UpdateUserHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
+}
+
+// enableCORSForUpdateUser adds the CORS headers specific to UpdateUserHandler
+func enableCORSForUpdateUser(w http.ResponseWriter) {
+	w.Header().Set("Access-Control-Allow-Origin", "https://setad.saaterco.com")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 }

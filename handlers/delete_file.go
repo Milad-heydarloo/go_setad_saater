@@ -1,3 +1,5 @@
+//
+
 package handlers
 
 import (
@@ -13,8 +15,20 @@ type DeleteFileRequest struct {
 	ID string `json:"id"`
 }
 
-// DeleteFileHandler هندلر برای حذف فایل
+// DeleteFileHandler هندلر برای حذف فایل با پشتیبانی از CORS
 func DeleteFileHandler(w http.ResponseWriter, r *http.Request) {
+	// تنظیم هدرهای CORS
+	w.Header().Set("Access-Control-Allow-Origin", "https://setad.saaterco.com")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+
+	// پاسخ به درخواست OPTIONS
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
+
 	// فقط اجازه درخواست POST
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
